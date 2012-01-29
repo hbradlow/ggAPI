@@ -50,5 +50,7 @@ def profile_view(request,username,data,game):
 		return render_to_response("ggapi/warcraft_profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
 	if game=="crysis":
 		return render_to_response("ggapi/crysis_profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
+	if game=="steam":
+		return render_to_response("ggapi/steam_profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
 	return render_to_response("ggapi/profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
 

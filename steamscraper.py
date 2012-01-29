@@ -84,7 +84,6 @@ class SteamScraper(Scraper):
             data = {}
             keys = self.gameHours.keys() 
             for item in keys:
-                print item
                 data[item] = {}
                 data[item]["Hours"] = self.gameHours[item]
                 data[item]["Achievements"] = self.gameAchievements[item]
@@ -92,7 +91,7 @@ class SteamScraper(Scraper):
                     data[item]["Class Achievements"] = self.classAchievements
                     data[item]["TF2 Achievements"] = self.achievements
                     data[item]["Personal Records"] = self.personalRecords
-            return data
+            return {"Steam": data}
 				
 
 if __name__ == "__main__":

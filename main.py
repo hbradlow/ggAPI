@@ -6,7 +6,6 @@ from steamscraper import *
 def getData(name, games="", id=0, realm=""):
     data = {} 
     game = games.lower() 
-    service = service.lower() 
     if games == "wow":
         scraper = WoWScraper(name=name,realm=realm)
         print scraper.getData()
