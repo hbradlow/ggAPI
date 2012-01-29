@@ -1,3 +1,3 @@
 import scraper
 def Crysis2Scraper(Scraper):
-	pass
+	def __init__(self,url):
