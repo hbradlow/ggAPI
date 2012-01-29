@@ -1,7 +1,54 @@
 {% extends "ggapi/base.html" %}
+{% block js %}
+<script type="text/javascript">
+	$(function(){
+			$("#game_select").change(function(){
+				var game = $("select option:selected").html();
+
+				$("#username").show();
+				$("#submit").show();
+				$("#id").hide();
+				if(game=="Starcraft"){
+					$("#id").show();
+				}
+				if(game=="World of Warcraft"){
+					$("#realm").show();
+				}
+			});
+	});
+</script>
+{% endblock %}
 {% block content %}
 	<form action="" method="post">{% csrf_token %}
-		<input type="text" name="username"></input>
-		<input type="submit" value="Go!"></input>
+		<table style="margin:0px auto;width:300px;">
+			<tbody>
+				<tr>
+					<td><select id="game_select" name="select">
+						<option value="">Select a game...</option>
+						<option id="starcraft_select" value="starcraft">Starcraft</option>
+						<option value="crysis">Crysis 2</option>
+						<option value="steam">Steam</option>
+						<option value="wow">World of Warcraft</option>
+					</select><td>
+					<td></td>
+				</tr>
+				<tr id="username" style="display:none;">
+					<td>Username:</td>
+					<td><input type="text" name="username"></input></td>
+				</tr>
+				<tr id="id" style="display:none;">
+					<td>Starcraft ID</td>
+					<td><input type="text" name="id"></input></td>
+				</tr>
+				<tr id="realm" style="display:none;">
+					<td>World of Warcraft Realm</td>
+					<td><input type="text" name="realm"></input></td>
+				</tr>
+				<tr id="submit" style="display:none;">
+					<td></td>
+					<td><input type="submit" value="Go!"></input></td>
+				</tr>
+			</tbody>
+		</table>
 	</form>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends "ggapi/base.html" %}
+{% block content %}
+	{% for key,value in data.wow.items %}
+		{{key}}
+		<br />
+		{{value}}
+		<br />
+		<br />
+		<br />
+	{% endfor %}
+{% endblock %}
