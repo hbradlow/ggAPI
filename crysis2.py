@@ -16,7 +16,7 @@ class Crysis2Scraper(Scraper):
 		#rank
 		rank =  soup.findAll("div",{"class":re.compile("overall")})[0].find("div",{"class":"rank"})
 		self.rank =  {}
-		self.rank['icon'] = rank.find("img")['src']
+		self.rank['icon'] = "http://www.mycrysis.com" + rank.find("img")['src']
 		self.rank['text'] = rank.find("div",{"class":"text"}).contents[0]
 		#basic_info
 		list =  soup.findAll("div",{"class":re.compile("overall")})[0].find("dl")
@@ -46,7 +46,7 @@ class Crysis2Scraper(Scraper):
 		self.matches = []
 		for item in list:
 			match = {}
-			match['icon'] = item.find("img")['src']
+			match['icon'] = "http://www.mycrysis.com" + item.find("img")['src']
 			match['location'] = item.find("h2").string
 			match['duration'] = item.findAll("dl")[0].find("dd").string
 			match['date'] = item.findAll("dl")[1].find("dd").string
@@ -57,7 +57,7 @@ class Crysis2Scraper(Scraper):
 		self.weapons = []
 		for item in list:
 			weapon = {}
-			weapon['icon'] = item.find("img")['src']
+			weapon['icon'] = "http://www.mycrysis.com" + item.find("img")['src']
 			weapon['name'] = item.find("h2").string
 			weapon['shots'] = item.findAll("dl")[0].findAll("dd")[0].string
 			weapon['hits'] = item.findAll("dl")[0].findAll("dd")[1].string
