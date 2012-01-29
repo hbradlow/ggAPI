@@ -4,14 +4,23 @@ import mechanize
 import BeautifulSoup
 import urllib
 class WoWScraper(Scraper): 
-    def __init__(self,url):  
+    def __init__(self,name,realm):
+        url = "http://us.battle.net/wow/en/character/" + realm + "/" + name + "/advanced"
         response = urllib.urlopen(url) 
         soup = BeautifulSoup.BeautifulSoup(response.read()) 
-        data = {}
+        self.data = {}
         if soup.find("div", {"class" : "server-error"}) == None: 
-            data['guild'] = soup.find("div", {"class" : "guild"}).find("a").string 
-            data['title'] = soup.find("div", {"class" : "title"}).string
-            data['race'] = soup.find("a", {"class" : "race"}).string
-            data['class'] = soup.find("a", {"class" : "class"}).string
-            data['spec'] = soup.find("a", {"class" : "spec tip"}).string
-            data['averageItemLvl'] = soup.find("span", {"class" : "equipped"}).string         
+            self.data['guild'] = soup.find("div", {"class" : "guild"}).find("a").string 
+            self.data['title'] = soup.find("div", {"class" : "title"}).string
+            self.data['race'] = soup.find("a", {"class" : "race"}).string
+            self.data['class'] = soup.find("a", {"class" : "class"}).string
+            self.data['spec'] = soup.find("a", {"class" : "spec tip"}).string
+            self.data['averageItemLvl'] = soup.find("span", {"class" : "equipped"}).string         
+<<<<<<< HEAD
+    def getData(self):
+        return {"World Of Warcraft" : self.data}
+=======
+if __name__ == "__main__":
+	w = WoWScraper("http://us.battle.net/wow/en/character/aegwynn/Kungen/advanced")
+	print "Data: ", w.data
+>>>>>>> 820eb436fdf4139fda613fff4aeff46f4d4eb6a2
