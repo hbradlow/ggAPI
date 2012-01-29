@@ -5,8 +5,7 @@ from scraper import Scraper
 
 class bf3scraper(Scraper):
 
-    def __init__(self, name):
-        url = "http://battlelog.battlefield.com/bf3/soldier/" + name + "/stats" 
+    def __init__(self, url):
         page = BeautifulSoup(urllib.urlopen(url))
 
         #general stats

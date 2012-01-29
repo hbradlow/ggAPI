@@ -10,7 +10,8 @@ class bf3scraper(Scraper):
         page = BeautifulSoup(urllib.urlopen(url))
 
         #general stats
-        a = page.find('div', {"class":"col_right c21_2_"})
+        data = {} 
+        self.rank 
 
 if __name__ == "__main__":
     
