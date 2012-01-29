@@ -1,8 +1,9 @@
 from wowscraper import *
 from crysis2 import * 
 from starcraft import * 
+from SteamScraper import * 
 
-def getData(name, games, id=0, realm="", service=""): 
+def getData(name, games=[], id=0, realm="", service=""): 
     data = {} 
     games[0] = games[0].lower() 
     service = service.lower() 
@@ -19,6 +20,8 @@ def getData(name, games, id=0, realm="", service=""):
         print scraper.getData() 
         return scraper.getData()
     elif service == "steam": 
-        return data 
+        scraper = SteamScraper(name)
+        print scraper.getData() 
+        return scraper.getData() 
     elif service == "xbox": 
         return data
