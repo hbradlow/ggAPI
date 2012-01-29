@@ -1,8 +1,9 @@
 from wowscraper import *
 from crysis2 import * 
 from starcraft import * 
+from SteamScraper import * 
 
-def getData(name, games, id=0, realm="", service=""): 
+def getData(name, games=[], id=0, realm="", service=""): 
     data = {} 
     games[0] = games[0].lower() 
     service = service.lower() 
