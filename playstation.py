@@ -21,7 +21,7 @@ class PlaystationScraper(Scraper):
 		self.soup = BeautifulSoup.BeautifulSoup(client.commands.getPageText()['result'])
 
 		#username
-		self.username = self.soup.find("id-handle").string
+		self.username = self.soup.find("div",{"id":"id-handle"}).string
 		print self.username
 
 if __name__ == "__main__":
