@@ -32,9 +32,17 @@ class SteamScraper(Scraper):
 			gName = block.find('h4').find(text=re.compile('.*'))
 			if gName == "Team Fortress 2":
 				tf2 = True
-			wHours = block.find('h5', text=re.compile('.* hrs last')).split()[0]
-			t = block.find('h5', text=re.compile('.*hrs .*')).split()
-			tHours = t[len(t)-4]
+			wHours = None
+			t = None
+			tHours = None
+			try:
+				wHours = block.find('h5', text=re.compile('.* hrs last')).split()[0]
+				t = block.find('h5', text=re.compile('.*hrs .*')).split()
+				tHours = t[len(t)-4]
+			except:
+				wHours = "Oops... Sorry"
+				t = "Oops... Sorry"
+				tHours = "Oops... Sorry"
 			gameHours[gName] = (wHours, tHours)
 			achieved = block.find({"class":"recentAchievements"}, text=re.compile('.*Achievements Earned'))		   
 			if achieved != None:
