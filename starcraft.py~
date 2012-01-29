@@ -5,9 +5,8 @@ import BeautifulSoup
 
 BASE_URL = "http://us.battle.net"
 class Starcraft2Scraper(Scraper):
-	def __init__(self,name, id):
+	def __init__(self,url):
 		br = mechanize.Browser()
-		url = "http://us.battle.net/sc2/en/profile/" + id + "/1/" + name + "/"
 		response = br.open(url)
 		soup = BeautifulSoup.BeautifulSoup(response.read())
 	
@@ -43,9 +42,7 @@ class Starcraft2Scraper(Scraper):
 			style_list = a.find("span")['style'].split('\'')
 			achievement['style'] = style_list[0] + "'" + BASE_URL + style_list[1] + "'".join(style_list[1:])
 			self.recent_achievements.append(achievement)
-			
-	def getData(self): 
-		return {"Starcraft" : {"Username" : self.username, "Score" : self.score, "Decals" : self.decals, "League Wins" : self.league_wins, "Games Won" : self.games, "Recent Achievements" : self.recent_achievements}}
+
 
 if __name__ == "__main__":
 	s = Starcraft2Scraper("http://us.battle.net/sc2/en/profile/2302508/1/ttjf/")
