@@ -15,12 +15,19 @@ class WoWScraper(Scraper):
             self.data['race'] = soup.find("a", {"class" : "race"}).string
             self.data['class'] = soup.find("a", {"class" : "class"}).string
             self.data['spec'] = soup.find("a", {"class" : "spec tip"}).string
-            self.data['averageItemLvl'] = soup.find("span", {"class" : "equipped"}).string         
+            self.data['averageItemLvl'] = soup.find("span", {"class" : "equipped"}).string
+            s = soup.find('li', {"data-id":"stamina"})
+            self.data['stamina'] = s.find("span", {"class":"value color-q2"}).string
+            s = soup.find('li', {"data-id":"strength"})
+            self.data['strength'] = s.find("span", {"class":"value color-q2"}).string
+            s = soup.find('li', {"data-id":"mastery"})
+            self.data['mastery'] = s.find("span", {"class":"value"}).string
+
 
     def getData(self):
         return {"wow" : self.data}
 
 if __name__ == "__main__":
-	w = WoWScraper("http://us.battle.net/wow/en/character/aegwynn/Kungen/advanced")
-	print "Data: ", w.data
+    w = WoWScraper("Kungen", "aegwynn")
+    print "Data: ", w.getData()
 

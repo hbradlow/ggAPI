@@ -18,8 +18,13 @@ def getData(name, games="", id=0, realm=""):
         scraper = Starcraft2Scraper(name=name, id=id) 
         print scraper.getData() 
         return scraper.getData()
+<<<<<<< HEAD
+    elif service == "steam": 
+        scraper = steamscraper(name)
+=======
     elif game == "steam": 
         scraper = SteamScraper(name)
+>>>>>>> 405d720975d0ba111b68ab5e4b6b929a37b82b69
         print scraper.getData() 
         return scraper.getData() 
     elif game == "xbox": 
