@@ -80,23 +80,24 @@ class SteamScraper(Scraper):
 		#class stats
 		a = page.findAll
 
-		def getData(self):
-			data = {}
-			keys = self.gameHours.keys() 
-			for item in keys: 
-				data = {}
-				data[item]["Hours"] = self.gameHours[item]
-				data[item]["Achievements"] = self.gameAchievements[item]
-				if item == "Team Fortress 2": 
-					data[item]["Class Achievements"] = self.classAchievements
-					data[item]["TF2 Achievements"] = self.achievements
-					data[item]["Personal Records"] = self.personalRecords
-			return data
+	def getData(self):
+            data = {}
+            keys = self.gameHours.keys() 
+            for item in keys:
+                print item
+                data[item] = {}
+                data[item]["Hours"] = self.gameHours[item]
+                data[item]["Achievements"] = self.gameAchievements[item]
+                if item == "Team Fortress 2": 
+                    data[item]["Class Achievements"] = self.classAchievements
+                    data[item]["TF2 Achievements"] = self.achievements
+                    data[item]["Personal Records"] = self.personalRecords
+            return data
 				
 
 if __name__ == "__main__":
     
-    s = SteamScraper("http://steamcommunity.com/id/deiterbomber/stats/TF2/?tab=stats")
+    s = SteamScraper("deiterbomber")
     for tup in s.classAchievements:
         print tup[0] + ' ' + tup[1]
 
@@ -109,3 +110,5 @@ if __name__ == "__main__":
     print s.gameHours
 
     print s.gameAchievements
+
+    print s.getData()
