@@ -6,10 +6,6 @@ from scraper import Scraper
 
 
 class SteamScraper(Scraper):
-    
-    #url argument should be to the player's game list page
-    def __init__(self, url):
-        # Should take a username as argument and then gather data for all of the games that user has played
         """
         fields: 
                 gameAchievements: a dictionary mapping game names to a string "x of y Achievements Earned"
@@ -20,8 +16,13 @@ class SteamScraper(Scraper):
             class achievements: a list of (class achievements earned:, x of y (%)
 
         """
+    
+    #url argument should be to the player's game list page
+    def __init__(self, username):
+        # Should take a username as argument and then gather data for all of the games that user has played
+        url = "http://steamcommunity.com/id/"+username+"/games"
         page = BeautifulSoup.BeautifulSoup(urllib.urlopen(url))
-
+        tf2 = False
 
         #total hours
         a = page.findAll('div', {"class":"gameListRowItem"})
@@ -29,6 +30,8 @@ class SteamScraper(Scraper):
         gameAchievements = {}
         for block in a:
             gName = block.find('h4').find(text=re.compile('.*'))
+            if gName == "Team Fortress 2":
+                tf2 = True
             wHours = block.find('h5', text=re.compile('.* hrs last')).split()[0]
             t = block.find('h5', text=re.compile('.*hrs .*')).split()
             tHours = t[len(t)-4]
@@ -39,6 +42,10 @@ class SteamScraper(Scraper):
             gameAchievements[gName] = achieved
         self.gameAchievements = gameAchievements
         self.gameHours = gameHours
+
+        if tf2:
+            page = BeautifulSoup.BeautifulSoup(urllib.urlopen(url+))
+               
 
         #achievements
         a = page.findAll('div', id=re.compile('achievementStats_.*'))
