@@ -29,17 +29,17 @@ def index(request):
 		select = request.POST['select']
 		if select=='starcraft':
 			id = request.POST['id']
-			data = main.getData(username,[select],id=id)
+			data = main.getData(username,select,id=id)
 			return profile_view(request,username,data,select)
 		if select=='wow':
 			realm = request.POST['realm']
-			data = main.getData(username,[select],realm=realm)
+			data = main.getData(username,select,realm=realm)
 			return profile_view(request,username,data,select)
 		if select=='steam':
-			data = main.getData(username,[select])
+			data = main.getData(username,select)
 			return profile_view(request,username,data,select)
 		if select=='crysis':
-			data = main.getData(username,[select])
+			data = main.getData(username,select)
 			return profile_view(request,username,data,select)
 	return render_to_response("ggapi/index.html",context_instance=RequestContext(request))
 
