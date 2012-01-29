@@ -18,9 +18,9 @@ class SteamScraper(Scraper):
         """
     
     #url argument should be to the player's game list page
-	def __init__(self, username):
+	def __init__(self, name):
 		# Should take a username as argument and then gather data for all of the games that user has played
-		url = "http://steamcommunity.com/id/"+username+"/games"
+		url = "http://steamcommunity.com/id/"+name+"/games"
 		page = BeautifulSoup.BeautifulSoup(urllib.urlopen(url))
 		tf2 = False
 
