@@ -23,10 +23,19 @@ class Starcraft2Scraper(Scraper):
 			decal['style'] = str(d.find("span")['style'].split('\'')[0]) + "'" + BASE_URL + str(d.find("span")['style'].split('\'')[1]) + "'".join(d.find("span")['style'].split('\'')[1:])
 			self.decals.append(decal)
 			
+		##wins
+		self.league_wins = soup.find("div",{"class":"module-body campaign-unearned"}).find("h2").string
+		self.games = {}
+		games = soup.find("div",{"class":"module-body campaign-unearned"}).find("ul").findAll("li")
+		self.games['custom_games'] = int(games[0].find("span").string)
+		self.games['ffa'] = int(games[1].find("span").string)
+		self.games['coop_vs_ai'] = int(games[2].find("span").string)
 
 if __name__ == "__main__":
 	s = Starcraft2Scraper("http://us.battle.net/sc2/en/profile/2302508/1/ttjf/")
 	print "Username: ", s.username
 	print "Score: ", s.score
 	print "Decals: ",s.decals
+	print "League Wins: ", s.league_wins
+	print "Games Won: ", s.games
 
