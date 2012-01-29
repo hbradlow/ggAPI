@@ -31,6 +31,19 @@ class Starcraft2Scraper(Scraper):
 		self.games['ffa'] = int(games[1].find("span").string)
 		self.games['coop_vs_ai'] = int(games[2].find("span").string)
 
+		##acheivements
+		response = br.open(url + "achievements/")
+		soup = BeautifulSoup.BeautifulSoup(response.read())
+
+		achievements = soup.find("div",{"id":"recent-achievements"}).findAll("a")
+		self.recent_achievements = []
+		for a in achievements:
+			achievement = {}
+			style_list = a.find("span")['style'].split('\'')
+			achievement['style'] = style_list[0] + "'" + BASE_URL + style_list[1] + "'".join(style_list[1:])
+			self.recent_achievements.append(achievement)
+
+
 if __name__ == "__main__":
 	s = Starcraft2Scraper("http://us.battle.net/sc2/en/profile/2302508/1/ttjf/")
 	print "Username: ", s.username
@@ -38,4 +51,5 @@ if __name__ == "__main__":
 	print "Decals: ",s.decals
 	print "League Wins: ", s.league_wins
 	print "Games Won: ", s.games
+	print "Recent Achievements: ", s.recent_achievements
 
