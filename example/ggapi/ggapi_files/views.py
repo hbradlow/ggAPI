@@ -30,25 +30,25 @@ def index(request):
 		if select=='starcraft':
 			id = request.POST['id']
 			data = main.getData(username,[select],id=id)
-			return profile_view(request,data,select)
+			return profile_view(request,username,data,select)
 		if select=='wow':
 			realm = request.POST['realm']
 			data = main.getData(username,[select],realm=realm)
-			return profile_view(request,data,select)
+			return profile_view(request,username,data,select)
 		if select=='steam':
 			data = main.getData(username,[select])
-			return profile_view(request,data,select)
+			return profile_view(request,username,data,select)
 		if select=='crysis':
 			data = main.getData(username,[select])
-			return profile_view(request,data,select)
+			return profile_view(request,username,data,select)
 	return render_to_response("ggapi/index.html",context_instance=RequestContext(request))
 
-def profile_view(request,data,game):
+def profile_view(request,username,data,game):
 	if game=="starcraft":
-		return render_to_response("ggapi/starcraft_profile_view.html",{"data":data},context_instance=RequestContext(request))
+		return render_to_response("ggapi/starcraft_profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
 	if game=="wow":
-		return render_to_response("ggapi/warcraft_profile_view.html",{"data":data},context_instance=RequestContext(request))
+		return render_to_response("ggapi/warcraft_profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
 	if game=="crysis":
-		return render_to_response("ggapi/crysis_profile_view.html",{"data":data},context_instance=RequestContext(request))
-	return render_to_response("ggapi/profile_view.html",{"data":data},context_instance=RequestContext(request))
+		return render_to_response("ggapi/crysis_profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
+	return render_to_response("ggapi/profile_view.html",{"username":username,"data":data},context_instance=RequestContext(request))
 

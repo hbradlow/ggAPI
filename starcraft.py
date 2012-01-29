@@ -7,7 +7,7 @@ BASE_URL = "http://us.battle.net"
 class Starcraft2Scraper(Scraper):
 	def __init__(self,name, id):
 		br = mechanize.Browser()
-		url = "http://us.battle.net/sc2/en/profile/" + id + "/1/" + name + "/"
+		url = BASE_URL + "/sc2/en/profile/" + id + "/1/" + name + "/"
 		response = br.open(url)
 		soup = BeautifulSoup.BeautifulSoup(response.read())
 	

@@ -3,10 +3,11 @@ import re
 import mechanize
 import BeautifulSoup
 
+BASE_URL = "http://www.mycrysis.com"
 class Crysis2Scraper(Scraper):
 	def __init__(self,name):
 		br = mechanize.Browser()
-		url = "http://www.mycrysis.com/" + name
+		url = BASE_URL + "/" + name
 		br.open(url)
 		br.select_form(nr=0)
 		br['age'] = "22"
@@ -17,7 +18,7 @@ class Crysis2Scraper(Scraper):
 		#rank
 		rank =  soup.findAll("div",{"class":re.compile("overall")})[0].find("div",{"class":"rank"})
 		self.rank =  {}
-		self.rank['icon'] = "http://www.mycrysis.com" + rank.find("img")['src']
+		self.rank['icon'] = rank.find("img")['src']
 		self.rank['text'] = rank.find("div",{"class":"text"}).contents[0]
 		#basic_info
 		list =  soup.findAll("div",{"class":re.compile("overall")})[0].find("dl")
@@ -34,7 +35,14 @@ class Crysis2Scraper(Scraper):
 			self.stats.append(zip(dts,dds))
 
 		##awards
-		self.awards = [c.find("div")['title'] for c in soup.findAll("div",{"class":"module profile-award"})[0].findAll("div",{"class":"content"})[0].find("ul").findAll("li")]
+		awards = soup.findAll("div",{"class":"module profile-award"})[0].findAll("div",{"class":"content"})[0].find("ul").findAll("li")
+		self.awards = []
+		for a in awards:
+			award = {}
+			style_list = a.find("div")['style'].split('(')
+			award['style'] = style_list[0] + "(" + BASE_URL + style_list[1] + ")".join(style_list[2:])
+			award['name'] = a.find("div")['title']
+			self.awards.append(award)
 
 		##nanosuit
 		self.nanosuit = soup.findAll("div",{"class":re.compile("module profile-nanousage?")})[0].findAll("div",{"class":"content"})[0]
