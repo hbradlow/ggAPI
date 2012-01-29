@@ -18,9 +18,9 @@ class SteamScraper(Scraper):
         """
     
     #url argument should be to the player's game list page
-	def __init__(self, name):
+	def __init__(self, username):
 		# Should take a username as argument and then gather data for all of the games that user has played
-		url = "http://steamcommunity.com/id/"+name+"/games"
+		url = "http://steamcommunity.com/id/"+username+"/games"
 		page = BeautifulSoup.BeautifulSoup(urllib.urlopen(url))
 		tf2 = False
 
@@ -79,34 +79,33 @@ class SteamScraper(Scraper):
 
 		#class stats
 		a = page.findAll
-		print "gamehours: " + str(self.gameHours) 
 
-	def getData(self):
-		data = {}
-		keys = self.gameHours.keys()  
-		for item in keys: 
+		def getData(self):
 			data = {}
-			data[item]["Hours"] = self.gameHours[item]
-			data[item]["Achievements"] = self.gameAchievements[item]
-			if item == "Team Fortress 2": 
-				data[item]["Class Achievements"] = self.classAchievements
-				data[item]["TF2 Achievements"] = self.achievements
-				data[item]["Personal Records"] = self.personalRecords
-		return data
-		
+			keys = self.gameHours.keys() 
+			for item in keys: 
+				data = {}
+				data[item]["Hours"] = self.gameHours[item]
+				data[item]["Achievements"] = self.gameAchievements[item]
+				if item == "Team Fortress 2": 
+					data[item]["Class Achievements"] = self.classAchievements
+					data[item]["TF2 Achievements"] = self.achievements
+					data[item]["Personal Records"] = self.personalRecords
+			return data
+				
 
 if __name__ == "__main__":
-	
-	s = SteamScraper("http://steamcommunity.com/id/deiterbomber/stats/TF2/?tab=stats")
-	for tup in s.classAchievements:
-		print tup[0] + ' ' + tup[1]
+    
+    s = SteamScraper("http://steamcommunity.com/id/deiterbomber/stats/TF2/?tab=stats")
+    for tup in s.classAchievements:
+        print tup[0] + ' ' + tup[1]
 
-	for a in s.achievements:
-		print a
+    for a in s.achievements:
+        print a
 
-	for pr in s.personalRecords:
-		print pr[0] + ' ' + pr[1]
+    for pr in s.personalRecords:
+        print pr[0] + ' ' + pr[1]
 
-	print s.gameHours
+    print s.gameHours
 
-	print s.gameAchievements
+    print s.gameAchievements
