@@ -4,9 +4,8 @@ import mechanize
 import BeautifulSoup
 
 class Crysis2Scraper(Scraper):
-	def __init__(self,name):
+	def __init__(self,url):
 		br = mechanize.Browser()
-		url = "http://www.mycrysis.com/" + name
 		br.open(url)
 		br.select_form(nr=0)
 		br['age'] = "22"
@@ -66,7 +65,7 @@ class Crysis2Scraper(Scraper):
 			weapon['kills'] = item.findAll("dl")[1].findAll("dd")[1].string
 			self.weapons.append(weapon)
 			
-	def getData(self): 
+	def getData(): 
 		return {"Rank" : self.rank, "Basic Info" : self.basic_info, "Stats" : self.stats, "Awards" : self.awards, "Nanosuit" : self.nanosuit, "Matches" : self.matches, "Weapons" : self.weapons}
 
 if __name__ == "__main__":

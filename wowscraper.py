@@ -4,7 +4,8 @@ import mechanize
 import BeautifulSoup
 import urllib
 class WoWScraper(Scraper): 
-    def __init__(self,url):  
+    def __init__(self,name,realm):
+        url = "http://us.battle.net/wow/en/character/" + realm + "/" + name + "/advanced"
         response = urllib.urlopen(url) 
         soup = BeautifulSoup.BeautifulSoup(response.read()) 
         self.data = {}
@@ -15,6 +16,11 @@ class WoWScraper(Scraper):
             self.data['class'] = soup.find("a", {"class" : "class"}).string
             self.data['spec'] = soup.find("a", {"class" : "spec tip"}).string
             self.data['averageItemLvl'] = soup.find("span", {"class" : "equipped"}).string         
+
+    def getData(self):
+        return {"World Of Warcraft" : self.data}
+
 if __name__ == "__main__":
 	w = WoWScraper("http://us.battle.net/wow/en/character/aegwynn/Kungen/advanced")
 	print "Data: ", w.data
+

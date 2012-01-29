@@ -1,19 +1,21 @@
-import crysis2
-import wowscraper
+from wowscraper import *
+from crysis2 import * 
 
-def getData(name, game, id=0, realm="", service=""): 
-    if type(game) != "list": 
-        return "Error: Must send a list of games, even for single game searces"
+def getData(name, games, id=0, realm="", service=""): 
     data = {} 
-    game = game.lower() 
+    games[0] = games[0].lower() 
     service = service.lower() 
-    if game == "wow": 
-        return data 
-    elif game == "crysis": 
-        return data 
-    elif game == "starcraft": 
+    if games[0] == "wow":
+        scraper = WoWScraper(name=name,realm=realm)
+        print scraper.getData()
+        return scraper.getData() 
+    elif games[0] == "crysis": 
+        scraper = Crysis2Scraper(name) 
+        print scraper.getData()
+        return scraper.getData() 
+    elif games[0] == "starcraft": 
         return data
     elif service == "steam": 
         return data 
-    elif service = "xbox": 
+    elif service == "xbox": 
         return data
