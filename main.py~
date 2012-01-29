@@ -1,7 +1,7 @@
 from wowscraper import *
 from crysis2 import * 
 from starcraft import * 
-from SteamScraper import * 
+from steamscraper import * 
 
 def getData(name, games=[], id=0, realm="", service=""): 
     data = {} 
