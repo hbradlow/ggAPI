@@ -9,17 +9,34 @@ class SteamScraper(Scraper):
     
     #url argument should be to the player's game list page
     def __init__(self, url):
+        """
+        fields: 
+                gameAchievements: a dictionary mapping game names to a string "x of y Achievements Earned"
+                gameHours: a dictionary mapping game names to a tuple (hours last 2 weeks, hours total)
+
+        TF2 fields:
+            achievements: a list of the special acheivements earned "achievement: value"
+            class achievements: a list of (class achievements earned:, x of y (%)
+
+        """
         page = BeautifulSoup.BeautifulSoup(urllib.urlopen(url))
+
 
         #total hours
         a = page.findAll('div', {"class":"gameListRowItem"})
         gameHours = {}
+        gameAchievements = {}
         for block in a:
             gName = block.find('h4').find(text=re.compile('.*'))
             wHours = block.find('h5', text=re.compile('.* hrs last')).split()[0]
             t = block.find('h5', text=re.compile('.*hrs .*')).split()
             tHours = t[len(t)-4]
             gameHours[gName] = (wHours, tHours)
+            achieved = block.find({"class":"recentAchievements"}, text=re.compile('.*Achievements Earned'))           
+            if achieved != None:
+                achieved = ' '.join(achieved.split())
+            gameAchievements[gName] = achieved
+        self.gameAchievements = gameAchievements
         self.gameHours = gameHours
 
         #achievements
@@ -55,23 +72,25 @@ class SteamScraper(Scraper):
         #class stats
         a = page.findAll
 
+
+
     
         
 
 
 
 if __name__ == "__main__":
-    #s = SteamScraper("http://steamcommunity.com/id/deiterbomber/stats/TF2/?tab=stats")
-    s = SteamScraper("http://steamcommunity.com/id/deiterbomber/games")
+    
+    s = SteamScraper("http://steamcommunity.com/id/deiterbomber/stats/TF2/?tab=stats")
     for tup in s.classAchievements:
         print tup[0] + ' ' + tup[1]
 
     for a in s.achievements:
         print a
 
-    print "Printing Records: "
-
     for pr in s.personalRecords:
         print pr[0] + ' ' + pr[1]
 
     print s.gameHours
+
+    print s.gameAchievements
