@@ -9,7 +9,6 @@ class SteamScraper(Scraper):
     
     #url argument should be to the player's game list page
     def __init__(self, url):
-        # Should take a username as argument and then gather data for all of the games that user has played
         """
         fields: 
                 gameAchievements: a dictionary mapping game names to a string "x of y Achievements Earned"
