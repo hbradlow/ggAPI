@@ -1,6 +1,6 @@
 {% extends "ggapi/base.html" %}
 {% block content %}
-	<table>
+	<table style="width:900px;margin:0px auto;">
 		<tbody>
 			{% for key,value in data.Crysis.items %}
 				<tr>
@@ -8,7 +8,7 @@
 					{% if key == "Matches" %}
 						<td>
 						{% for match in value %}
-							<div style="float:left;clear:none;background:rgba(255,255,255,.2);margin:3px;">
+							<div class="box" style="float:left;clear:none;margin:3px;">
 								<img style="float:left;clear:none;" src="{{match.icon}}">
 								<div style="float:left;clear:none;">
 									<div>{{match.location}}</div>
@@ -19,7 +19,74 @@
 						{% endfor %}
 						</td>
 					{% else %}
+					{% if key == "Stats" %}
+						<td>
+							<div>Username: {{username}}</div>
+							<div>Games: {{value.0.0.1}}</div>
+							<div>Wins: {{value.0.1.1}}</div>
+							<div>Losses: {{value.0.2.1}}</div>
+							<div>Kills: {{value.1.0.1}}</div>
+							<div>Deaths: {{value.1.1.1}}</div>
+							<div>Dog Tags: {{value.1.2.1}}</div>
+							<div>Time played: {{value.1.0.1}}</div>
+						</td>
+					{% else %}
+					{% if key == "Awards" %}
+						<td>
+						{% for award in value %}
+							<div class="box" style="margin:3px;width:150px;height:95px;float:left;clear:none;">
+								<div>{{award.name}}</div>
+								<div style="{{award.style}}; float:left;clear:none;margin:3px;height:52px;width:52px;"></div>
+							</div>
+						{% endfor %}
+						</td>
+					{% else %}
+					{% if key == "Nanosuit" %}
+						<td>
+							<div>Power: {{value.0.1}}</div>
+							<div>Armor: {{value.1.1}}</div>
+							<div>Stealth: {{value.2.1}}</div>
+						</td>
+					{% else %}
+					{% if key == "Weapons" %}
+						<td>
+						{% for weapon in value %}
+							<div class="box" style="float:left;width:300px;clear:none;margin:3px;">
+								<img style="float:left;clear:none;" src="{{weapon.icon}}">
+								<div style="float:left;clear:none;">
+									<div>{{weapon.name}}</div>
+									<div>Hits: {{weapon.hits}}</div>
+									<div>Kills: {{weapon.kills}}</div>
+									<div>Shots: {{weapon.shots}}</div>
+								</div>
+							</div>
+						{% endfor %}
+						</td>
+					{% else %}
+					{% if key == "Basic Info" %}
+						<td>
+							<div>From: {{value.0.1}}</div>
+							<div>Member since: {{value.1.1}}</div>
+							<div>Forum Posts: {{value.2.1}}</div>
+						</td>
+					{% else %}
+					{% if key == "Rank" %}
+						<td>
+							<div class="box" style="float:left;clear:none;margin:3px; background:black;">
+								<img style="float:left;clear:none;" src="{{value.icon}}">
+								<div style="float:left;clear:none;color:white;">
+									<div>{{value.text}}</div>
+								</div>
+							</div>
+						</td>
+					{% else %}
 					<td>{{value}}</td>
+					{% endif %}
+					{% endif %}
+					{% endif %}
+					{% endif %}
+					{% endif %}
+					{% endif %}
 					{% endif %}
 				<tr>
 			{% endfor %}
