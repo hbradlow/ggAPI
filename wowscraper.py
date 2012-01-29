@@ -18,7 +18,7 @@ class WoWScraper(Scraper):
             self.data['averageItemLvl'] = soup.find("span", {"class" : "equipped"}).string         
 
     def getData(self):
-        return {"World Of Warcraft" : self.data}
+        return {"wow" : self.data}
 
 if __name__ == "__main__":
 	w = WoWScraper("http://us.battle.net/wow/en/character/aegwynn/Kungen/advanced")

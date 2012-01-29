@@ -25,9 +25,9 @@ class Starcraft2Scraper(Scraper):
 			self.decals.append(decal)
 			
 		##wins
-		self.league_wins = soup.find("div",{"class":"module-body campaign-unearned"}).find("h2").string
+		self.league_wins = soup.find("div",{"class":re.compile("module-body campaign?")}).find("h2").string
 		self.games = {}
-		games = soup.find("div",{"class":"module-body campaign-unearned"}).find("ul").findAll("li")
+		games = soup.find("div",{"class":re.compile("module-body campaign?")}).find("ul").findAll("li")
 		self.games['custom_games'] = int(games[0].find("span").string)
 		self.games['ffa'] = int(games[1].find("span").string)
 		self.games['coop_vs_ai'] = int(games[2].find("span").string)

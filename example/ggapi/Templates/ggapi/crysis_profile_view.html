@@ -1,0 +1,28 @@
+{% extends "ggapi/base.html" %}
+{% block content %}
+	<table>
+		<tbody>
+			{% for key,value in data.Crysis.items %}
+				<tr>
+					<td>{{key}}</td>
+					{% if key == "Matches" %}
+						<td>
+						{% for match in value %}
+							<div style="float:left;clear:none;background:rgba(255,255,255,.2);margin:3px;">
+								<img style="float:left;clear:none;" src="{{match.icon}}">
+								<div style="float:left;clear:none;">
+									<div>{{match.location}}</div>
+									<div>{{match.date}}</div>
+									<div>{{match.duration}}</div>
+								</div>
+							</div>
+						{% endfor %}
+						</td>
+					{% else %}
+					<td>{{value}}</td>
+					{% endif %}
+				<tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

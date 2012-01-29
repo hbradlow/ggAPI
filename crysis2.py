@@ -67,7 +67,7 @@ class Crysis2Scraper(Scraper):
 			self.weapons.append(weapon)
 			
 	def getData(self): 
-		return {"Rank" : self.rank, "Basic Info" : self.basic_info, "Stats" : self.stats, "Awards" : self.awards, "Nanosuit" : self.nanosuit, "Matches" : self.matches, "Weapons" : self.weapons}
+		return {"Crysis": {"Rank" : self.rank, "Basic Info" : self.basic_info, "Stats" : self.stats, "Awards" : self.awards, "Nanosuit" : self.nanosuit, "Matches" : self.matches, "Weapons" : self.weapons}}
 
 if __name__ == "__main__":
 	c = Crysis2Scraper("http://www.mycrysis.com/emre8888")
