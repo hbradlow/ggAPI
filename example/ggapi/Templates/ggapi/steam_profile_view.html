@@ -1,35 +1,22 @@
 {% extends "ggapi/base.html" %}
 {% block content %}
+	<h1 style="text-align:center;">Steam data:</h1>
 	<table style="width:450px;margin:0px auto;">
 		<tbody>
 			{% for key,value in data.Steam.items %}
 				<tr>
 					<td>{{key}}</td>
-					{% if key == "Decals" %}
-						<td>
-						{% for decal in value %}
-							<div style="{{decal.style}}; float:left;clear:none;margin-right:5px;" title="{{decal.type}}"></div>
-						{% endfor %}
-						</td>
-					{% else %}
-					{% if key == "Recent Achievements" %}
-						<td>
-						{% for achievement in value %}
-							<div style="{{achievement.style}}; float:left;clear:none;margin:3px;"></div>
-						{% endfor %}
-						</td>
-					{% else %}
-					{% if key == "Games Won" %}
-						<td>
-							<div>Custom Games: {{value.custom_games}}</div>
-							<div>FFA: {{value.ffa}}</div>
-							<div>Co-Op vs AI: {{value.coop_vs_ai}}</div>
-						</td>
-					{% else %}
-						<td>{{value}}</td>
-					{% endif %}
-					{% endif %}
-					{% endif %}
+					<td>
+						<div>
+							<div>Hours played: {{value.Hours.0}}</div>
+							<div>Achievements: {{value.Achievements}}</div>
+							{% if key == "Team Fortress 2" %}
+							<div>Personal Records: {{value.Personal_Records}}</div>
+							<div>TF2 Achievements: {{value.TF2_Achievements}}</div>
+							<div>Class Achievements: {{value.Class_Achievements}}</div>
+							{% endif %}
+						</div>
+					</td>
 				<tr>
 			{% endfor %}
 		</tbody>
