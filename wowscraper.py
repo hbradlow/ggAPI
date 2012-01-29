@@ -22,6 +22,14 @@ class WoWScraper(Scraper):
             self.data['strength'] = s.find("span", {"class":"value color-q2"}).string
             s = soup.find('li', {"data-id":"mastery"})
             self.data['mastery'] = s.find("span", {"class":"value"}).string
+            s = soup.find('li', {"data-id":"intellect"})
+            self.data['intellect'] = s.find("span", {"class":"value"}).string
+            s = soup.find('li', {"data-id":"spirit"})
+            self.data['spirit'] = s.find("span", {"class":"value"}).string
+            s = soup.find('li', {"data-id":"agility"})
+            self.data['agility'] = s.find("span", {"class":"value"}).string
+
+
 
 
     def getData(self):
