@@ -1,0 +1,12 @@
+from scraper import * 
+import re 
+import mechanize 
+import BeautifulSoup
+
+class WoWScraper(Scraper): 
+    def __init__(self,url): 
+        br = mechanize.Browser() 
+        br.open(url) 
+        response = br.submit() 
+        soup = BeautifulSoup.BeautifulSoup(response.read()) 
+        print soup

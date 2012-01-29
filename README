@@ -1,2 +1,14 @@
-Henry Bradlow
-Will Skinner
+There are two levels to this library, the class that the user interacts with contained in main.py, and the lower
+level where each game/distribution system has a custom scraper.
+
+MAIN CLASS ARGUMENTS: 
+-username 
+-list of games 
+-id * 
+-realm * 
+-service * 
+
+The sublevel scrapers take the same arguments, and return the following: 
+
+-A dictionary with key=game name, value=dictionary of that games stats
+ 
